@@ -15,4 +15,31 @@
     </div>
     <div id="board">Aqui vão aparecer as <mensgaens class=""></mensgaens></div>
 </body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    const sendButton = document.getElementById('send');
+    const messageInput = document.getElementById('msg');
+    const board = document.getElementById('board');
+
+    sendButton.addEventListener('click', () => {
+        const message = messageInput.value;
+        if (message.trim() !== '') {
+            socket.emit('chat message', message);
+            messageInput.value = '';
+        }
+    });
+
+    socket.on('chat message', (msg) => {
+        const messageElement = document.createElement('p');
+        messageElement.textContent = msg;
+        board.appendChild(messageElement);
+    });
+
+
+</script>
+
+
 </html>

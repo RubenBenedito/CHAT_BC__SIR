@@ -8,7 +8,7 @@ const server = createServer(app);
 const io = new Server(server);
 const PORT = 3010;
 
-app.use(express.static('static'));
+app.use(express.static('public'));
 
 io.on('connection', (socket) => {
     console.log('A user connected');
